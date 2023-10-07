@@ -9,7 +9,7 @@ void swaap(int *arr, int size)
 
     while (L<R)
     {
-       while (arr[L]==0 &L<R)
+       while (arr[L]==0 && L<R)
        {
         L++;
        }
