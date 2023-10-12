@@ -1,3 +1,9 @@
+/*
+Space Complexity : O(1)
+
+Time Complexity : O(n^2) ---> Worst case || Best case 
+
+*/
 #include<iostream>
 using namespace std;
 
