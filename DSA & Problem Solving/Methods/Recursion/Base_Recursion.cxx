@@ -12,7 +12,10 @@ void print(int n)
     return;
 
     cout<<n<<" ";
-    print(n+1);
+    print(n+1); // this is tail recursion
+    //Becuse this is last statemnt of this function and it call it self but there are some funcions which are head recursion like f(n-1)+f(n-2) ,
+    //this type of function are head recursion becuse in this type of function the  function call iteself but its laste statement also a first one which i mentoion 
+    
 }
 
 int main(int argc, char const *argv[])
