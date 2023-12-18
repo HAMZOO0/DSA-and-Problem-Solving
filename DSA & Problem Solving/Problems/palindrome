@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+#include <algorithm> 
+
+
+using namespace std;
+int main() {
+  std::string input , orinal ;
+   
+   std::cout << "Enter a string: ";
+   std::getline(std::cin, input);
+   
+   // upper case to lower case converter 
+  for(int i= 0 ; i < input.length(); i++)
+  {
+  	if(input[i] >= 'A' && input[i]<='Z')
+  	{
+  		input[i]-='A'; 
+  		input[i]+='a'; 
+		  	
+	}
+  }
+  
+  std::cout<<input<<std::endl;
+  
+    orinal = input ; 
+
+// reverse the input string for compare the orignal string to find it is equal 
+reverse(input.begin() , input.end());
+std::cout<<input<<std::endl;
+
+    
+    if(orinal ==input )
+    std::cout<<"String is palindrome ";
+    
+    else
+    std::cout<<"string in not palindrome ";
+
+    return 0;
+}
+
+
