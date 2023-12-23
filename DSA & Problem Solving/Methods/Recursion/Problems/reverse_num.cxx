@@ -1,6 +1,5 @@
-#include <iostream>
-using namespace std;
 
+// method # 1 
 void reverse(int n)
 {
 
@@ -16,10 +15,15 @@ void reverse(int n)
    }
 }
 
-// Driver Program
-int main()
+// method  # 2 
+
+int sum = 0;
+int fun(int n)
 {
-   int n=1234;
-   reverse(n); //Calling recursive function
-   return 0;
+  if (n == 0)
+    return sum;
+
+  sum = (sum* 10) + (n % 10);
+  return fun(n / 10);
 }
+
