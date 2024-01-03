@@ -27,3 +27,38 @@ int main()
     else
         cout << "False ";
 }
+
+// count the number of occurence 
+
+vector<int> stor;
+
+void check(int *arr, int index, int length, int target)
+{
+    if (index == length)
+        return;
+
+    else if (arr[index] == target)
+    {
+        stor.push_back(index);
+        check(arr, index + 1, length, target);
+    }
+
+    else
+        return check(arr, index + 1, length, target);
+}
+
+int main()
+{
+
+    int arr[] = {1, 24, 4, 4, 4};
+    int index = 0;
+    int size = 5;
+    int target = 4;
+
+    check(arr, index, size, target);
+
+    for (int i = 0; i < stor.size(); i++)
+    {
+        cout << stor[i] << " ";
+    }
+}
