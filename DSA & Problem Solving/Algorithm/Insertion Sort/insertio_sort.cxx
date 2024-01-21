@@ -15,34 +15,48 @@ O(1)
 #include <iostream>
 using namespace std;
 
-int main(int argc, char const *argv[])
+// Function to perform insertion sort on an array
+// Parameters:
+//   arr: an integer array to be sorted
+//   n: the number of elements in the array
+void sort(int arr[], int n)
 {
-    int n = 7;
-    int arr[7] = {10, 1, 7, 4, 8, 2, 11};
-
-    for (int i = 1; i < n; i++) // this loop is use to select a elements, start form 1st index bcz 0th is sorted that we consider 
+    // Traverse through the array starting from the second element
+    for (int i = 1; i < n; i++)
     {
+        // Store the current element in a temporary variable
         int temp = arr[i];
 
+        // Move elements of arr[0..i-1] that are greater than temp
+        // to one position ahead of their current position
         int j = i - 1;
-        for (; j >= 0; j--)     // this loop use to compare the selected (i) element with i-1 elemts 
+        while (j >= 0 && arr[j] > temp)
         {
-            if (arr[j] > temp)   // if next (j) elemnts is less then previus one then we shift 
-                arr[j + 1] = arr[j];   // |10|10|7| ...    temp =1 
-
-            else
-                break;
+            arr[j + 1] = arr[j];
+            j--;
         }
-        arr[j + 1] = temp;          //after that j value alwas like (j-1)
-        //cout<<j<<" "; 
 
-
+        // Place the current element (temp) at its correct position
+        arr[j + 1] = temp;
     }
+}
 
-    for (int i = 0; i < n; i++)
+// Function to print the elements of an array
+void print(int *arr, int n)
+{
+    // Iterate through the array and print each element
     {
         cout << arr[i] << " ";
     }
+}
+
+int main()
+{
+    int arr[] = {10, 1, 11, 3, 5};
+
+    sort(arr, 5);
+
+    print(arr, 5);
 
     return 0;
 }
