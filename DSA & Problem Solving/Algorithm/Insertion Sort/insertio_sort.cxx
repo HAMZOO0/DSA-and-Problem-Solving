@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
     int n = 7;
     int arr[7] = {10, 1, 7, 4, 8, 2, 11};
 
-    for (int i = 1; i < n; i++) // this loop is use to select a elements
+    for (int i = 1; i < n; i++) // this loop is use to select a elements, start form 1st index bcz 0th is sorted that we consider 
     {
         int temp = arr[i];
 
