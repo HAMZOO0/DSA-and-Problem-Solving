@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+
+int power_calc(int pow  , int base)
+{
+	if(pow == 1)
+	return base;
+	
+	
+	return  base * power_calc(--pow,base); 
+	
+}
+
+ int main()
+ {
+ 	
+ int pow = 3; 
+ int base = 2;
+ 
+ cout<<power_calc(pow,base); 
+ 
+ 
+}
