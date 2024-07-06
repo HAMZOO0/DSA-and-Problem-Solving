@@ -1,8 +1,4 @@
-/*
-Hamza
-23
-topic:
-*/
+
 #include <iostream>
 using namespace std;
 
@@ -21,13 +17,13 @@ void insert_in_head(Node *&head, int data)
 {
    Node *temp = new Node(data); // Create a new node with the provided data
    temp->nextNode = head;       // Point the new node's next to the current head
-   head = temp;              // Update head to point to the new node
+   head = temp;                 // Update head to point to the new node
 }
 
 // Function to print the linked list
 void printList(Node *head)
 {
-   while (head)
+   while (head != NULL)
    {
       cout << head->data << " ";
       head = head->nextNode;
