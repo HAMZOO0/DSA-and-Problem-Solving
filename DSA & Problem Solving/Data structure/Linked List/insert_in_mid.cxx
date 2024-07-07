@@ -1,8 +1,4 @@
-/*
-Hamza
-23
-topic:
-*/
+
 #include <iostream>
 using namespace std;
 
@@ -34,13 +30,20 @@ void insert_in_tail(Node *&head, int data)
 
     tail->Next_node = temp;
 }
+
+// for mid insertion
 void insert_in_mid(Node *&head, int data, int postion)
 {
+    if (postion == 1)
+    {
+        // call head_insert_function
+    }
+
     Node *NEW_NODE_TO_INSert = new Node(data);
     Node *temp = head;
     int count = 1;
 
-    while (count <= postion - 1)
+    while (count < postion - 1)
     {
         temp = temp->Next_node;
         ++count;
