@@ -19,8 +19,9 @@ public:
 
         size = s;
         arr = new int[size];
-        front = -1;
-        rear = -1;
+        // start from zero bcz we want to add in circular way
+        front = 0;
+        rear = 0;
     }
     ~Queue()
     {
@@ -31,7 +32,7 @@ public:
     bool isEmpty()
     {
 
-        if (front == -1 && rear == -1)
+        if (front == rear)
         {
             front = 0;
             return true;
@@ -98,11 +99,10 @@ int main(int argc, char const *argv[])
 
     Queue q(5);
 
-    q.enqueue(1);
+    q.enqueue(10);
     q.enqueue(2);
     q.enqueue(3);
     q.enqueue(4);
-    q.enqueue(5);
 
     q.print();
 
