@@ -58,9 +58,10 @@ public:
         {
             return;
         }
-
         rear++;
         arr[rear] = data;
+        // cout << endl
+        //      << "rar is " << rear << "  , data: " << data << " , size" << size << endl;
     }
 
     void dequeue()
