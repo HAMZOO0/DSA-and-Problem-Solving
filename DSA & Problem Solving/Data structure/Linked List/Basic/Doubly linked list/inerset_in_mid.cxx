@@ -6,7 +6,7 @@ void insert_in_mid(Node *&head, int data, int postion)
     }
 
     Node *NEW_NODE_TO_INSert = new Node(data);
-    Node *temp = head;
+    Node *temp = head; 
     int count = 1;
 
     while (count < postion - 1)
