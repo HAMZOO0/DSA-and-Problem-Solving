@@ -1,8 +1,4 @@
-/*
-Hamza
-23
-topic:
-*/
+
 #include <iostream>
 #include <list>
 #include <map>
