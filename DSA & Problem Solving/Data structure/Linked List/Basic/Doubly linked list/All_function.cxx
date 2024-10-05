@@ -2,15 +2,15 @@
 #include <iostream>
 using namespace std;
 
-class DoubleCircularList
+class DoubleList
 {
 
 public:
     int data;
-    DoubleCircularList *next; // pointer to next node
-    DoubleCircularList *prev; // pointer to previous node
+    DoubleList *next; // pointer to next node
+    DoubleList *prev; // pointer to previous node
 
-    DoubleCircularList(int data)
+    DoubleList(int data)
     {
         this->data = data;
         this->next = nullptr;
@@ -20,10 +20,10 @@ public:
 
 //  insert at head of the list
 
-void insertAtStart(DoubleCircularList *&head, int data)
+void insertAtStart(DoubleList *&head, int data)
 {
 
-    DoubleCircularList *temp = new DoubleCircularList(data);
+    DoubleList *temp = new DoubleList(data);
 
     if (head == nullptr)
     {
@@ -33,13 +33,11 @@ void insertAtStart(DoubleCircularList *&head, int data)
     }
 
     temp->next = head;
+    head->prev = temp;
+    temp->prev = nullptr;
     head = temp;
-    temp->prev = head;
 }
-
-//  insert at tail/End  of the list
-
-void insertAtEnd(DoubleCircularList *&head, int data)
+void insertAtEnd(DoubleList *&head, int data)
 {
 
     // if head is null
@@ -49,9 +47,9 @@ void insertAtEnd(DoubleCircularList *&head, int data)
     }
 
     // create  a new node
-    DoubleCircularList *temp = new DoubleCircularList(data);
+    DoubleList *temp = new DoubleList(data);
     // here we create  a tail node
-    DoubleCircularList *tail = head;
+    DoubleList *tail = head;
     // traverse till the last node
     while (tail->next != nullptr)
     {
@@ -64,7 +62,7 @@ void insertAtEnd(DoubleCircularList *&head, int data)
 }
 
 // ! note : here i am using *head pointer bcz we are not changing its data
-void insertAtPos(DoubleCircularList *&head, int data, int pos)
+void insertAtPos(DoubleList *&head, int data, int pos)
 {
     // if head is null
     if (head == nullptr || pos == 1 || pos == 0)
@@ -77,7 +75,7 @@ void insertAtPos(DoubleCircularList *&head, int data, int pos)
         cout << "invalid position \n";
     }
 
-    DoubleCircularList *working_Node = head;
+    DoubleList *working_Node = head;
 
     for (int i = 1; i < pos - 1; i++)
     {
@@ -101,7 +99,7 @@ void insertAtPos(DoubleCircularList *&head, int data, int pos)
     }
 
     // linking
-    DoubleCircularList *temp = new DoubleCircularList(data);
+    DoubleList *temp = new DoubleList(data);
 
     // Linking the new node
     temp->next = working_Node->next; // Link temp to the next node
@@ -110,55 +108,66 @@ void insertAtPos(DoubleCircularList *&head, int data, int pos)
     working_Node->next = temp;       // Link the current node to temp
 }
 // Delete node at a specific position
-void delete_node(DoubleCircularList *&head, int pos)
+void delete_node(DoubleList *&head, int pos)
 {
+    // Check if the list is empty
     if (head == nullptr)
     {
-        cout << "Invalid position, list is empty\n";
+        cout << "Invalid position: List is empty\n";
         return;
     }
 
-    // If user wants to delete the first node
+    // Special case: deleting the first node
     if (pos == 1)
     {
-        DoubleCircularList *temp = head;
-        head = temp->next;
+        DoubleList *temp = head; // Store the current head
+        head = head->next;       // Move head to the next node
 
+        // If there's more than one node in the list
         if (head != nullptr)
-            head->prev = nullptr;
+        {
+            head->prev = nullptr; // Update the new head's previous pointer
+        }
 
-        delete temp;
+        // Clear pointers of the node to be deleted
+        temp->next = nullptr; // Disconnect the next pointer
+        temp->prev = nullptr; // Disconnect the previous pointer
+        delete temp;          // Delete the old head
         return;
     }
- 
-    DoubleCircularList *delete_node = head;
 
-    for (int i = 1; i < pos; i++)
+    // Traverse to find the node to delete
+    DoubleList *current = head;
+    for (int i = 1; i < pos && current != nullptr; i++)
     {
-        delete_node = delete_node->next;
-
-        if (delete_node == nullptr) // Position out of bounds
-        {
-            cout << "Invalid position\n";
-            return;
-        }
+        current = current->next;
     }
 
-    // If deleting the last node
-    if (delete_node->next == nullptr)
+    // If the position is invalid (greater than the number of nodes)
+    if (current == nullptr)
     {
-        delete_node->prev->next = nullptr;
-    }
-    else
-    {
-        delete_node->prev->next = delete_node->next;
-        delete_node->next->prev = delete_node->prev;
+        cout << "Invalid position\n";
+        return;
     }
 
-    delete delete_node;
+    // Update the links for deletion
+    if (current->prev != nullptr)
+    {
+        current->prev->next = current->next; // Link the previous node to the next node
+    }
+    if (current->next != nullptr)
+    {
+        current->next->prev = current->prev; // Link the next node back to the previous node
+    }
+
+    // Clear pointers of the node to be deleted
+    current->next = nullptr; // Disconnect the next pointer
+    current->prev = nullptr; // Disconnect the previous pointer
+
+    // Delete the node
+    delete current;
 }
-
-void print(DoubleCircularList *head)
+void print(DoubleList *head)
 {
 
     if (head == nullptr)
@@ -172,15 +181,16 @@ void print(DoubleCircularList *head)
         cout << head->data << " ";
         head = head->next;
     }
+    cout << endl; // Ensure a newline after printing
 }
 
 // delete whole list
-void delete_all(DoubleCircularList *&head)
+void delete_all(DoubleList *&head)
 {
 
     while (head != nullptr)
     {
-        DoubleCircularList *temp = head;
+        DoubleList *temp = head;
         head = head->next;
         temp->next = nullptr;
         temp->prev = nullptr;
@@ -192,7 +202,7 @@ int main(int argc, char const *argv[])
 {
 
     int userChoice;
-    DoubleCircularList *head = nullptr;
+    DoubleList *head = nullptr;
 
     insertAtStart(head, 1);
     insertAtStart(head, 2);
@@ -203,7 +213,7 @@ int main(int argc, char const *argv[])
     // insertAtEnd(head, 1000);
 
     // insertAtPos(head, 69, 0);
-    delete_node(head, 3);
+    delete_node(head, 2);
 
     print(head);
 
