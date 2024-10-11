@@ -1,93 +1,56 @@
-#include <iostream>
-#include <map>
-#include <list>
-#include <queue>
-using namespace std;
+from collections import deque
 
-class Graph
-{
-    // Adjacency list using a map of lists
-    map<int, list<int>> adjList;
+class Graph:
 
-public:
-    // Add an edge to the graph
-    void addEdge(int u, int v, bool bidir = true)
-    {
-        adjList[u].push_back(v);
-        if (bidir)
-        {
-            adjList[v].push_back(u);
-        }
-    }
+    def __init__(self):
+        # Using a dictionary to store the adjacency list -> key-value pair 
+        self.adjList = {}
+    def addEdge(self, u, v, bidir=True):
+        # If 'u' is not in adjList, initialize with an empty list
+        if u not in self.adjList:
+            self.adjList[u] = []
+        # Add the edge from 'u' to 'v'
+        self.adjList[u].append(v)
 
-    // BFS function to traverse the graph
-    void bfs(int start)
-    {
-        // Map to keep track of visited nodes
-        map<int, bool> visited;
+        if bidir:
+            # If 'v' is not in adjList, initialize with an empty list
+            if v not in self.adjList:
+                self.adjList[v] = []
+            # Add the edge from 'v' to 'u' for bidirectional graphs
+            self.adjList[v].append(u)
 
-        // Queue for BFS
-        queue<int> q;
+    def print(self):
+        # Printing the adjacency list
+        for node in self.adjList:
+            print(f"{node}: {self.adjList[node]}")
+            
+    def bfs(self , start):
+         # Dictionary to keep track of visited nodes
+         visited = {}
 
-        // Mark the start node as visited and enqueue it
-        visited[start] = true;
-        q.push(start);
+         visited[start] = True 
+         queue = deque([start])
 
-        // While there are vertices in the queue
-        while (!q.empty())
-        {
-            // Dequeue a vertex from the queue and print it
-            int node = q.front();
-            q.pop();
-            cout << node << " ";
+         while queue:
 
-            // Get all adjacent vertices of the dequeued vertex
-            for (int neighbor : adjList[node])
-            {
-                // If an adjacent vertex has not been visited, mark it visited and enqueue it
-                if (!visited[neighbor])
-                {
-                    visited[neighbor] = true;
-                    q.push(neighbor);
-                }
-            }
-        }
-        cout << endl; // To ensure output is clean
-    }
+             node = queue.popleft()
 
-    // Print adjacency list (for debugging or visualization)
-    void printAdjList()
-    {
-        for (auto i : adjList)
-        {
-            cout << i.first << " -> ";
-            for (int j : i.second)
-            {
-                cout << j << " ";
-            }
-            cout << endl;
-        }
-    }
-};
+             print(node)
 
-int main()
-{
-    Graph g;
+             for neighbour in self.adjList[node]:
+                 if neighbour not in visited:
+                    visited[neighbour] = True  # Mark as visited
+                    queue.append(neighbour)
 
-    // Adding edges to the graph
-    g.addEdge(0, 1);
-    g.addEdge(0, 4);
-    g.addEdge(1, 2);
-    g.addEdge(2, 3);
-    g.addEdge(3, 4);
-    g.addEdge(4, 5);
+# Creating the graph object and adding edges
+G1 = Graph()
+G1.addEdge(0, 1)
+G1.addEdge(0, 2)
+G1.addEdge(1, 2)
+G1.addEdge(2, 0)
+G1.addEdge(2, 3)
+G1.addEdge(3, 3)
 
-    cout << "Adjacency List of the Graph:" << endl;
-    g.printAdjList();
-
-    // Perform BFS from node 0
-    cout << "\nBreadth-First Search (BFS) starting from node 0:" << endl;
-    g.bfs(0);
-
-    return 0;
-}
+# Print the adjacency list of the graph
+# G1.print()
+G1.bfs(0)
