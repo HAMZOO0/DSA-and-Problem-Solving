@@ -40,10 +40,10 @@ def bfs(maze):
 
 # Test the function with a sample maze
 maze = [
-    [0, 1, 0, 0, 0],
-    [0, 1, 0, 1, 0],
+    [0, 0, 0, 0, 0],
     [0, 0, 0, 1, 0],
-    [1, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0],
+    [1, 0, 1, 0, 0],
     [0, 0, 0, 0, 0]
 ]
 
@@ -59,3 +59,6 @@ else:
 
 # len(maze) gives you the total number of rows.
 # len(maze[0]) gives you the number of columns in the first row, assuming all rows have the same number of columns.
+
+
+# The BFS algorithm chooses the best (shortest) path and puts all possible paths in the queue. However, as soon as it finds the shortest path to the goal, it stops processing the rest of the queue.
