@@ -2,7 +2,7 @@ from collections import deque
 
 # Function to perform BFS and find the path
 def bfs(maze):
-    # Get the size of the grid (rows and columns)
+    # Get the size of the grid (rows and columns) 
     rows, cols = len(maze), len(maze[0])
     
     # Directions for moving: right, down, left, up
