@@ -1,6 +1,6 @@
 /*
 Video No : 199
-*/
+ */
 #include <iostream>
 #include <vector>
 using namespace std;
