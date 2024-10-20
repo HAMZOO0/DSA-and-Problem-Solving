@@ -33,3 +33,77 @@ playlist-manager/
 ├── Song.cpp           # Implementation of the Song class
 
 └── Song.h             # Header file for the Song class
+
+
+
+## 1. `main.cxx`
+
+### Purpose
+- This is the main entry point of the program. It handles user interactions and presents a menu to perform various actions on the playlist.
+
+### Functions
+- **User Menu**: Displays options for the user to choose actions such as adding, removing, or displaying songs.
+- **Input Handling**: Captures user input and directs the flow of the program based on the selected option.
+- **Playlist Interaction**: Calls methods from the `Playlist` class to manage the song list according to user commands.
+
+### Example Functions
+- `main()`: Initializes the program and enters the main loop to interact with the user.
+
+## 2. `Playlist.h`
+
+### Purpose
+- This header file declares the `Playlist` class, which manages the collection of songs.
+
+### Functions
+- **Class Declaration**: Defines the structure of the `Playlist` class, including private and public members.
+- **Method Prototypes**: Declares methods for adding, removing, and displaying songs, along with searching and navigation methods.
+
+### Example Methods
+- `addSong(Song* newSong)`: Adds a new song to the playlist.
+- `removeSong(string title)`: Removes a song from the playlist by title.
+- `displaySongs()`: Displays all songs in the playlist.
+
+## 3. `Playlist.cpp`
+
+### Purpose
+- This file contains the implementation of the `Playlist` class methods declared in `Playlist.h`.
+
+### Functions
+- **Add, Remove, and Search Logic**: Implements the logic for managing songs in the playlist.
+- **Traversal Methods**: Provides functionality to display songs in the correct order and manage song navigation.
+
+### Example Methods
+- `addSong(Song* newSong)`: Handles the logic to add a song to either the head or tail of the linked list.
+- `removeSong(string title)`: Finds and removes a specified song from the playlist.
+- `displaySongs()`: Iterates through the linked list and prints each song's details.
+
+## 4. `Song.h`
+
+### Purpose
+- This header file declares the `Song` class, which represents individual songs in the playlist.
+
+### Functions
+- **Class Declaration**: Defines the structure of the `Song` class, including its attributes and methods.
+
+### Example Methods
+- `getTitle()`: Returns the title of the song.
+- `getArtist()`: Returns the artist of the song.
+
+## 5. `Song.cpp`
+
+### Purpose
+- This file contains the implementation of the `Song` class methods declared in `Song.h`.
+
+### Functions
+- **Attribute Management**: Implements methods to get and set song attributes.
+- **Linked List Pointers**: Manages the pointers (`next` and `prev`) used for traversing the linked list of songs.
+
+### Example Methods
+- `getTitle()`: Returns the title of the song.
+- `setTitle(string title)`: Sets the title of the song.
+- `getArtist()`: Returns the artist of the song.
+
+## Conclusion
+
+This file structure provides a clear separation of concerns, with the `main.cxx` file focusing on user interactions, while `Playlist` and `Song` classes handle the data and logic behind managing a playlist of songs. Each file plays a crucial role in making the Playlist Manager functional and user-friendly.
+
